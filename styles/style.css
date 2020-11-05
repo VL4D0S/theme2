@@ -11,6 +11,7 @@
 body {
     width: 100%;
     margin: 0;
+    color: #000000;
     font-family: PTSerif, sans-serif;
     font-size: 40px;
 }
@@ -28,30 +29,50 @@ body {
     box-shadow: 0 0 14px 4px rgba(0, 0, 0, 0.05);
     background-color: #ffffff;
 }
-
+.header.active {
+    box-shadow: none;
+}
 .header__content {
     display: flex;
     justify-content: space-between;
     padding-top: 7px;
     padding-bottom: 7px;
 }
-
+.header__logo.active > img {
+    display: none;
+}
 .header__menu {
     width: 52px;
     height: 52px;
     padding-top: 17px;
+    cursor: pointer;
 }
 .menu-item1 {
     width: 34px;
     height: 4px;
-    background-color: #000000;
     margin-bottom: 8px;
+    background-color: #000000;
+    transition: all .5s ease-in-out;
+}
+
+.menu-item1.active {
+    margin-top: 7px;
+    margin-left: 10px;
+    transform: rotate(45deg);
 }
 
 .menu-item2 {
     width: 24px;
     height: 4px;
     background-color: #000000;
+    transition: all .5s ease-in-out;
+}
+
+.menu-item2.active {
+    width: 34px;
+    margin-top: -11px;
+    margin-left: 10px;
+    transform: rotate(-45deg);
 }
 
 .main {
@@ -64,6 +85,14 @@ body {
 .main__categories {
     width: 100%;
     margin: 0 auto;
+}
+
+.main__categories.active {
+    display: block;
+}
+
+.main__categories.hide {
+    display: none;
 }
 
 .category__item{
@@ -97,4 +126,72 @@ body {
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
+}
+
+.main__menu {
+    width: 100%;
+    margin: 0 auto;
+}
+.main__menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 85px);
+}
+.main__menu.hide {
+    display: none;
+}
+.main__menu.active {
+    display: block;
+}
+.main__menu-content {
+    flex: 1 0 auto;
+}
+.main__menu-titles {
+    margin-bottom: 80px;
+}
+.menu__title-item {
+    padding-bottom: 20px;
+    font-size: 36px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 70.01px;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.menu__contacts-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.contacts__item-icon {
+    margin-top: -10px;
+}
+.contacts__item-text {
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.contacts__item-text:last-child {
+    padding-left: 20px;
+}
+
+.main__menu-footer {
+    display: flex;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.menu__footer-icon > a {
+    text-decoration: none;
 }
