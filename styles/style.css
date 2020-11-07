@@ -9,6 +9,7 @@
          url(../font/PTSerif-Bold.ttf);
 }
 body {
+    position: relative;
     width: 100%;
     margin: 0;
     color: #000000;
@@ -17,6 +18,7 @@ body {
 }
 
 .container {
+    position: relative;
     width: 85%;
     margin: 0 auto;
 }
@@ -320,4 +322,110 @@ body {
     letter-spacing: normal;
     line-height: 16px;
     padding-bottom: 10px;
+}
+
+.product__item-descr {
+    display: none;
+}
+.modal__window {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 270px;
+    height: 377px;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 0 0 14px 4px rgba(0, 0, 0, 0.05);
+    z-index: 5;
+}
+.modal__window.hide {
+    display: none;
+}
+
+.modal__window.active {
+    display: block;
+}
+
+.modal__window-img  {
+    margin: 0 auto;
+    width: 214px;
+    height: 214px;
+    margin-bottom: 10px;
+}
+.modal__window-img > img{
+    width: 214px;
+    height: 214px;
+}
+
+.modal__window-title {
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 16px;
+    margin-bottom: 3px;
+}
+.modal__window-price {
+    height: 30px;
+    font-size: 22px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 18px;
+    margin-bottom: 10px;
+}
+
+.modal__window-newprice {
+    display: flex;
+    justify-content: space-between;
+    max-width: 200px;
+}
+
+.window__newprice-price {
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.window__newprice-duration {
+    font-size: 16px;
+    font-weight: 400;
+    color: #808080;
+}
+
+.window__price-oldprice {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    text-decoration: line-through;
+    text-decoration-color: #e64040;
+}
+
+.modal__window-desc {
+    max-width: 200px;
+    color: #a5a5a5;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 16px;
+}
+.modal__opacity {
+    width: 100%;
+    max-width: 600px;
+    height: 102%;
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    transform: translateX(-50%);
+    background-color: rgba(153, 145, 145, .2);
+    z-index: 3;
+}
+
+.modal__opacity.hide {
+    display: none;
+}
+
+.modal__opacity.active {
+    display: block;
 }
