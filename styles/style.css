@@ -40,6 +40,39 @@ body {
     padding-top: 7px;
     padding-bottom: 7px;
 }
+
+.header__back.hide {
+    display: none;
+}
+.header__back.active {
+    display: block;
+    cursor: pointer;
+}
+.header__back-title {
+    position: relative;
+    max-width: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.header__back-title::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 11px;
+    width: 12px;
+    height: 20px;
+    background-image: url(../icon/arrow-back.svg);
+    background-repeat: no-repeat;
+    background-size: 12px 20px;
+    z-index: 3;
+}
+
 .header__logo.active > img {
     display: none;
 }

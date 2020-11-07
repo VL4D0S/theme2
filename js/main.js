@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector(".header"),
+          headerBack = document.querySelector(".header__back"),
+          headerBackTitle = document.querySelector(".header__back-title");
           menu = document.querySelector(".header__menu"),
           logo = document.querySelector(".header__logo"),
           menuItem1 = document.querySelector(".menu-item1"),
@@ -20,28 +22,33 @@ document.addEventListener("DOMContentLoaded", () => {
           modalWindowdDuration = document.querySelector(".window__newprice-duration"),
           modalWindowOldprice = document.querySelector(".window__price-oldprice"),
           modalWindowDesc = document.querySelector(".modal__window-desc");
-    let activePage, imgBlock, modalImgSrc, modalTitle, modalNewPrice, modalDuration, modalOldPrice, modalDesc;
+    let activePage, imgBlock, modalImgSrc, modalTitle, modalNewPrice, modalDuration, modalOldPrice, modalDesc, step, stepPage, stepTitle;
+    function showContent(elem) {
+        elem.classList.remove("hide");
+        elem.classList.add("active");
+    }
+    function hideContent(elem) {
+        elem.classList.remove("active");
+        elem.classList.add("hide");
+    }
     menu.addEventListener("click", function () {
         if (!menuItem1.classList.contains("active")) {
             menuItem1.classList.add("active");
             menuItem2.classList.add("active");
             header.classList.add("active");
             logo.classList.add("active");
-            mainMenu.classList.remove("hide");
-            mainMenu.classList.add("active");
-            mainPage.classList.remove("active");
-            mainPage.classList.add("hide");
+            showContent(mainMenu);
+            hideContent(mainPage);
+            hideContent(headerBack);
             for (let n = 0; n < categoryPages.length; n++) {
                 if (categoryPages[n].classList.contains("active")) {
-                    categoryPages[n].classList.remove("active");
-                    categoryPages[n].classList.add("hide");
+                    hideContent(categoryPages[n]);
                     activePage = categoryPages[n];
                 } 
             }
             for (let m = 0; m < productsPages.length; m++) {
                 if (productsPages[m].classList.contains("active")) {
-                    productsPages[m].classList.remove("active");
-                    productsPages[m].classList.add("hide");
+                    hideContent(productsPages[m]);
                     activePage = productsPages[m];
                 }
             }
@@ -50,54 +57,71 @@ document.addEventListener("DOMContentLoaded", () => {
             menuItem2.classList.remove("active");
             header.classList.remove("active");
             logo.classList.remove("active");
-            mainMenu.classList.remove("active");
-            mainMenu.classList.add("hide");
+            hideContent(mainMenu);
             if (activePage) {
-                activePage.classList.add("active");
-                activePage.classList.remove("hide");
+                showContent(activePage);
+                showContent(headerBack);
             } else {
-                mainPage.classList.add("active");
-                mainPage.classList.remove("hide");
+                showContent(mainPage);
             }
         }
     });
-
+    headerBack.addEventListener("click", function () {
+        if (step == 1) {
+            hideContent(headerBack);
+            showContent(mainPage);
+            for (let x = 0; x < categoryPages.length; x++){
+                hideContent(categoryPages[x]);
+            }
+        } else if (step == 2) {
+            for (let x = 0; x < productsPages.length; x++){
+                hideContent(productsPages[x]);
+            }
+            headerBackTitle.innerHTML = stepTitle;
+            showContent(stepPage);
+            step -= 1;
+        }
+    });
     for (let i = 0; i < menuTitleItem.length; i++) {
         menuTitleItem[i].addEventListener("click", function () {
-            mainMenu.classList.remove("active");
-            mainMenu.classList.add("hide");
-            categoryPages[i].classList.remove("hide");
-            categoryPages[i].classList.add("active");
+            hideContent(mainMenu);
+            showContent(categoryPages[i]);
             header.classList.remove("active");
             logo.classList.remove("active");
             menuItem1.classList.remove("active");
             menuItem2.classList.remove("active");
+            headerBackTitle.innerHTML = menuTitleItem[i].textContent;
+            showContent(headerBack);
+            step = 1;
+            stepPage = categoryPages[i];
         });
     }
     for (let j = 0; j < categoryItem.length; j++) {
         categoryItem[j].addEventListener("click", function () {
-            mainPage.classList.remove("active");
-            mainPage.classList.add("hide");
-            categoryPages[j].classList.remove("hide");
-            categoryPages[j].classList.add("active");
+            hideContent(mainPage);
+            showContent(categoryPages[j]);
+            headerBackTitle.innerHTML = categoryItem[j].children[1].textContent;
+            showContent(headerBack);
+            step = 1;
+            stepPage = categoryPages[j];
+            stepTitle = categoryItem[j].children[1].textContent;
         });
     }
     for (let b = 0; b < categoriesRowItems.length; b++) {
         categoriesRowItems[b].addEventListener("click", function () {
             for (let c = 0; c < categoryPages.length; c++) {
-                categoryPages[c].classList.remove("active");
-                categoryPages[c].classList.add("hide");
+                hideContent(categoryPages[c]);
             }
-            productsPages[b].classList.remove("hide");
-            productsPages[b].classList.add("active");
+            showContent(productsPages[b]);
+            headerBackTitle.innerHTML = categoriesRowItems[b].children[1].textContent;
+            step = 2;
         });
     }
     for (let k = 0; k < productsItem.length; k++) {
         productsItem[k].addEventListener("click", function () {
             modalWindow.style.top = (window.pageYOffset - 20) + "px";
             document.body.style.overflow = "hidden";
-            modalWindow.classList.remove("hide");
-            modalWindow.classList.add("active");
+            showContent(modalWindow);
             imgBlock = productsItem[k].querySelector(".product__item-img");
             modalImgSrc = imgBlock.children[0].getAttribute("src");
             modalTitle = productsItem[k].querySelector(".product__item-title").textContent;
@@ -121,15 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 modalWindowOldprice.innerHTML = "";
             }
             modalWindowDesc.innerHTML = modalDesc;
-            modalOpacity.classList.remove("hide");
-            modalOpacity.classList.add("active");
+            showContent(modalOpacity);
         });
     }
     modalOpacity.addEventListener("click", function () {
         document.body.style.overflow = "";
-        modalWindow.classList.remove("active");
-        modalWindow.classList.add("hide");
-        modalOpacity.classList.remove("active");
-        modalOpacity.classList.add("hide");
+        hideContent(modalWindow);
+        hideContent(modalOpacity);
     });
 });
