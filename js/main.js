@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
             showContent(headerBack);
             step = 1;
             stepPage = categoryPages[i];
+            stepTitle = menuTitleItem[i].textContent;
         });
     }
     for (let j = 0; j < categoryItem.length; j++) {
